@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Aux from '../../hoc/Aux';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
+import Model from '../../components/UI/Modal/Modal';
 
 const INGREDIENT_PRICE = {
     salad: 0.5,
@@ -25,6 +26,7 @@ class BurgerBuilder extends Component {
         totalPrice: 4,
         purchasable: false
     }
+    //update the purchase state
     updatePurchaseState (ingredients) {
         const sum = Object.keys(ingredients).map(igKey => {
             return ingredients[igKey];
@@ -34,6 +36,7 @@ class BurgerBuilder extends Component {
             }, 0);
         this.setState({purchasable: sum > 0});
     }
+    // add ingredients
     addIngredientHandler = (type) => {
         const oldCount = this.state.ingredients[type];
         const updateCount = oldCount + 1;
@@ -47,6 +50,7 @@ class BurgerBuilder extends Component {
         this.setState({totalPrice: newPrice, ingredients: updateIngredients});
         this.updatePurchaseState(updateIngredients);
     }
+    //remove ingredients
     removeIngredientHandler = (type) => {
         const oldCount = this.state.ingredients[type];
         if (oldCount <= 0){
@@ -72,6 +76,7 @@ class BurgerBuilder extends Component {
         }
         return (
             <Aux>
+                <Model />
                 <Burger ingredients={this.state.ingredients}/>
                 <BuildControls
                     ingredientAdded = {this.addIngredientHandler}
