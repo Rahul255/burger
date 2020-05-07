@@ -32,6 +32,10 @@ class BurgerBuilder extends Component {
     purchaseHandler = () => {
         this.setState({purchasing: true});
     }
+    //cancel the purchase so, that time popup is close
+    purchaseCancelHandler = () => {
+        this.setState({purchasing: false});
+    }
     //update the purchase state
     updatePurchaseState (ingredients) {
         const sum = Object.keys(ingredients).map(igKey => {
@@ -83,7 +87,7 @@ class BurgerBuilder extends Component {
         }
         return (
             <Aux>
-                <Model show={this.state.purchasing}>
+                <Model show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
                     <OrderSummary ingredients={this.state.ingredients  }/>
                 </Model>
                 <Burger ingredients={this.state.ingredients}/>
